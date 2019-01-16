@@ -17,34 +17,27 @@ class Player(pygame.sprite.Sprite):
         self.player_dies = [] #player dies
         self.player_gets_hurt = [] #player is injuried by the other player
 
-        self.wfq = 5 # frames walking
-        self.twq = 1 # frames throwing an object
-        self.dwq = 1 # frames dying
+        self.wfq = 4 # frames walking
+        self.twq = 0 # frames throwing an object
+        self.dwq = 0 # frames dying
+        self.total_frames = self.wfq + self.twq + self.dwq
         self.ani = 4
         self.ALPHA = (255, 255, 255)
 
-        self.set_animacion_caminar()
+        self.set_animaciones()
 
 
-    def set_animacion_caminar(self):
+    def set_animaciones(self):
         
-        for i in range(1, self.wfq):
-            img = pygame.image.load(os.path.join('images', str(self.player_id) + str(i) + '.png')).convert()
+        for i in range(1, self.total_frames + 1):
+            img = pygame.image.load(os.path.join('images/pueblo/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
             img.convert_alpha()  # optimise alpha
             img.set_colorkey(self.ALPHA)  # set alpha
 
-    def set_animacion_morir(self):
-        pass
-
-    def set_animacion_atacar(self):
-        pass
-
-    def set_animacion_recibir_ataque(self):
-        pass    
-    
+   
     
     def control(self, x, y):
         #control player movement
@@ -59,14 +52,14 @@ class Player(pygame.sprite.Sprite):
         # moving left
         if self.movex < 0:
             self.frame += 1
-            if self.frame > 4:
+            if self.frame > self.wfq:
                 self.frame = 0
             self.image = pygame.transform.flip(self.images[self.frame // -1], True, False)
 
         # moving right
         if self.movex > 0:
             self.frame += 1
-            if self.frame > 3:
+            if self.frame > self.wfq - 1:
                 self.frame = 0
             self.image = self.images[(self.frame)]
 

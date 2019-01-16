@@ -2,14 +2,14 @@ import pygame  # load pygame keywords
 import sys     # let  python use your file system
 import os      # help python identify your OS
 import Player as pl
+
+
+img_player1 = sys.argv[1]
+img_background = sys.argv[2]
+
+
 '''
 Objects
-'''
-
-
-
-'''
-Setup
 '''
 worldx = 960
 worldy = 720
@@ -18,15 +18,24 @@ ani   = 4   # animation cycles
 clock = pygame.time.Clock()
 pygame.init()
 world    = pygame.display.set_mode([worldx,worldy])
-backdrop = pygame.image.load("Images/Background.png").convert()
+
+
+#img = pygame.image.load(os.path.join('images/pueblo/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
+backdrop = pygame.image.load("Images/fondos/" + img_background + ".png").convert()
 backdropbox = world.get_rect()
-player = pl.Player('hero')   # spawn player
+
+
+'''
+Setup
+'''
+player = pl.Player(img_player1)   # spawn player
 player.rect.x = 0   # go to x
 player.rect.y = 0   # go to y
 player_list = pygame.sprite.Group()
 player_list.add(player)
 steps = 10  # how many pixels to move
 main = True
+
 '''
 Main Loop
 '''
