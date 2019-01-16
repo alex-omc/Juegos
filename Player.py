@@ -9,48 +9,53 @@ class Player(pygame.sprite.Sprite):
         self.movex = 0  # move along X
         self.movey = 0  # move along Y
         self.frame = 0  # count frames
-        self.frameL = 0
+        self.frameL = 0 # player moves to the left
 
         self.player_id = player_id
         self.images = [] #moving to the right
         self.throw = []  # player throws object - arm movement only
         self.player_dies = [] #player dies
-
-        self.image = None
-        self.rect = None
+        self.player_gets_hurt = [] #player is injuried by the other player
 
         self.wfq = 5 # frames walking
-        self.twq = 1 # frames throwing
+        self.twq = 1 # frames throwing an object
         self.dwq = 1 # frames dying
         self.ani = 4
+        self.ALPHA = (255, 255, 255)
 
-        self.set_animation()
+        self.set_animacion_caminar()
 
 
-    def set_animation(self):
-        ALPHA = (255, 255, 255)
+    def set_animacion_caminar(self):
+        
         for i in range(1, self.wfq):
             img = pygame.image.load(os.path.join('images', str(self.player_id) + str(i) + '.png')).convert()
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
             img.convert_alpha()  # optimise alpha
-            img.set_colorkey(ALPHA)  # set alpha
+            img.set_colorkey(self.ALPHA)  # set alpha
 
+    def set_animacion_morir(self):
+        pass
 
+    def set_animacion_atacar(self):
+        pass
+
+    def set_animacion_recibir_ataque(self):
+        pass    
+    
+    
     def control(self, x, y):
-        '''
         #control player movement
-        '''
         self.movex += x
         self.movey += y
 
-    def update(self):
-        '''
-        Update sprite position
-        '''
+    def update(self):        
+        #Update sprite position        
         self.rect.x = self.rect.x + self.movex
         self.rect.y = self.rect.y + self.movey
+        
         # moving left
         if self.movex < 0:
             self.frame += 1
