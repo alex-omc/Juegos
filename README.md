@@ -11,3 +11,9 @@
 
 
 <p>De las dos carpetas "images", solo sirve la que empieza con i <b>minúscula</b> </p>
+
+<h2>Clase Engine</h2>
+python Engine.py hero Background
+
+<h2>Log in</h2>
+python MenuLogin.py
