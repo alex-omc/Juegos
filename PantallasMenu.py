@@ -2,12 +2,11 @@ import pygame  # load pygame keywords
 import sys     # let  python use your file system
 import os      # help python identify your OS
 
-class VentanasMenu():
-    bkg = sys.argv = [1]
-    
-    def __init__(self, bkg):
-        #self.bakg = bkg #background
-        self.main = True
+class VentanasMenu(pygame.sprite.Sprite):    
+     
+    def __init__(self):
+        self.bakg = "bkg" #background
+        
     
     #Crear ventana
     worldx = 1280
@@ -16,33 +15,42 @@ class VentanasMenu():
     ani   = 4   # animation cycles
     clock = pygame.time.Clock()
     pygame.init()
-    world    = pygame.display.set_mode([worldx,worldy])
-    #self.main = True
+    world = pygame.display.set_mode([worldx,worldy])
+ 
 
     #cargar fondo de login
-    backdrop = pygame.image.load("Images/menu/" + str(bkg) + ".jpeg").convert()
+    backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + "login" + ".jpeg").convert()
+    #backdrop = pygame.image.load("images/menu/" + "Background" + ".png").convert()
     backdropbox = world.get_rect()
 
-    #Coordenadas de las esquinas de los botones
-    #el orden es [esz.sup.izq, ancho(px), alto(px)]
-    btn_registrar = [0,0,0]    
-    btn_fotgot_password = [0,0,0]
-    btn_creditos = [0,0,0]
-    btn_quit = [0,0,0]
+
+    def detectar_posicion(self, posX, posY):
+        '''
+        print(pos)
+        print("\nPosicion 0 de pos es " + str(pos[0]))
+        print("\nPosicion 1 de pos es " + str(pos[1]))
+        '''
 
 
-    def detectar_posicion(self, pos, pres):
-        #Verificar en qué lugar se hizo click
-        #Pos is the mouse position or a tuple of (x,y) coordinates
-        #pres indica si si el botón del mouse está presionado
+        '''
+        Medidas de los botones en píxeles        
+        btn_registrar / btn_fotgot_password 
+        btn_creditos / btn_quit
+        el orden es [esz.sup.izq (px), ancho(px), alto(px)]
+        '''
+      
+        medidas = [[0,1,2],[0,1,2],[0,1,2],[0,1,2]]
+
         arr_bool = [False, False, False, False]
         k = 0
         b1 = False
         b2 = False
-        for i in range[ btn_registrar, btn_fotgot_password, btn_creditos, btn_quit]:
-            b1 = (pos[0] in range(i[0], i[0] + i[1] + 1))
-            b2 = (pos[1] in range(i[0], i[0] + i[2] + 1))   
-            arr_bool[k] = b1 and b2
+        #for i in range[btn_registrar, btn_fotgot_password, btn_creditos, btn_quit]:
+        for i in range(0,4):
+            b1 = (pos[0] in range(medidas[i][0], medidas[i][0] + medidas[i][1] + 1))
+            b2 = (pos[1] in range(medidas[i][0], medidas[i][0] + medidas[i][2] + 1))   
+            arr_bool[k] = (b1 and b2)
+            print(k)
             k += 1         
         
         if arr_bool[0] :
@@ -55,25 +63,46 @@ class VentanasMenu():
             #Recuperar contraseña
             pass
         elif arr_bool[3]:
-            #salir
-            aelf.main = False
- 
+            pygame.quit(); sys.exit()
+            
 
 
-    while self.main == True:
+
+    pnt = True #pantalla
+    while pnt:
+        
         for event in pygame.event.get():
+            #Verificar en qué lugar está el mouse, 
+            #retorna una tupla (x,y) de coordenadas            
             pos = pygame.mouse.get_pos()
-            
+
+            if event.type == pygame.QUIT:
+                pygame.quit(); sys.exit()
+                pnt = False
+
+            pres = False
+
+            #Verificar si el botón del mouse está presionado
             if event.type == pygame.MOUSEBUTTONDOWN:
-                presionado = True            
+                pres = True            
             
-            detectar_posicion(pos, presionado)
+            '''
+            print("\n\nPos tiene una longitud de " + str(len(pos)))
+            print("\n" + str(pos))
+            print("Posicion 0 de pos es " + str(pos[0]))
+            print("Posicion 1 de pos es " + str(pos[1]) + "\n")
+            '''
+
+            if pres: 
+                detectar_posicion(pos[0], pos[1])
 
 
             '''
             FALTA CODIFICAR LA PARTE DE ESCRITURA EN LOS TEXTBOX
             '''
-
+        world.blit(backdrop, backdropbox)    
+        pygame.display.flip()
+        clock.tick(fps)
         
         
 
@@ -81,9 +110,7 @@ class VentanasMenu():
 
 
 
-    world.blit(backdrop, backdropbox)    
-    pygame.display.flip()
-    clock.tick(fps)
+    
 
 
 '''

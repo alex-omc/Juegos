@@ -40,7 +40,7 @@ main = True
 Main Loop
 '''
 
-while main == True:
+while main:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit(); sys.exit()
@@ -52,6 +52,7 @@ while main == True:
             if event.key == pygame.K_RIGHT or event.key == ord('d'):
                 player.control(steps,0)
             if event.key == pygame.K_UP or event.key == ord('w'):
+                #print(os.getcwd())
                 print('jump')
 
         if event.type == pygame.KEYUP:
