@@ -27,12 +27,10 @@ class VentanasMenu(pygame.sprite.Sprite):
     backdropbox = world.get_rect()
 
 
-    def lugar_presionado(self, posX=0, posY=0, tif=1):
+    def lugar_presionado(self, posX=0, posY=0):
         '''
         posX --> Posición del mouse en el eje X
         posY --> Posición del mouse en el eje Y
-        tif   --> Tipo de interface, el número depende de la 
-            cantidad de textbox que tenga el menu en presente
         -----------------------------------------------------------------------
         Medidas de los dim_btn en píxeles 
         btn_registrar / btn_fotgot_password 
@@ -65,7 +63,18 @@ class VentanasMenu(pygame.sprite.Sprite):
         elif bool_btn[3]:           
             pygame.quit(); sys.exit()
             continuar = False
+        
+        return continuar
+
             
+
+    def escribir_txt(self, posX=0, posY=0, tif=1):
+        '''
+        tif --> Tipo de interface, el número depende de la 
+        cantidad de textbox que tenga el menu en presente
+        '''
+        
+        
         #Text Box
         if (tif == 1):
             pass
@@ -74,8 +83,10 @@ class VentanasMenu(pygame.sprite.Sprite):
             #es decir que muestre puntos al escribir
             pass
 
-        return continuar
-            
+        
+
+
+
 
 
 
