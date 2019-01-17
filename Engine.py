@@ -11,8 +11,8 @@ img_background = sys.argv[2]
 '''
 Objects
 '''
-worldx = 960
-worldy = 720
+worldx = 1280
+worldy = 800
 fps   = 40  # frame rate
 ani   = 4   # animation cycles
 clock = pygame.time.Clock()
@@ -21,7 +21,7 @@ world    = pygame.display.set_mode([worldx,worldy])
 
 
 #img = pygame.image.load(os.path.join('images/pueblo/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
-backdrop = pygame.image.load("Images/fondos/" + img_background + ".png").convert()
+backdrop = pygame.image.load("Images/fondos/" + img_background + ".jpg").convert()
 backdropbox = world.get_rect()
 
 

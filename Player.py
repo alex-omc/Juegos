@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
     def set_animaciones(self):
         
         for i in range(1, self.total_frames + 1):
-            img = pygame.image.load(os.path.join('images/pueblo/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
+            img = pygame.image.load(os.path.join('images/personajes/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
             self.images.append(img)
             self.image = self.images[0]
             self.rect = self.image.get_rect()
