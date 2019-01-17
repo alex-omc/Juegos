@@ -1,7 +1,10 @@
-<h1> Motor del Juego - xxxxxx </h1>
+<h1> Ing SW2 - ULima - Chapa tu Choro </h1>
 
-<h2> Integrantes </h2>
+<h2> Grupo Engine </h2>
 <ul>Alexander Mendez</ul>
 <ul>Alvaro Samanamud</ul>
 <ul>Paolo Flores</ul>
 <ul>Mario Llaque</ul>
+
+<h2> Grupo Arte </h2>
+<ul>Ricardo Melgarejo</ul>
