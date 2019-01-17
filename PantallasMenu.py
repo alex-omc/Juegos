@@ -38,7 +38,10 @@ class VentanasMenu(pygame.sprite.Sprite):
         el orden es [esz.sup.izq (px), ancho(px), alto(px)]
         '''
         continuar = True
-
+        '''
+        Las dimensiones y posiciones siempre son las mismas, por eso se
+        declaran acá en la clase padre
+        '''
         dim_btn = [[0,1,2],[0,1,2],[0,1,2],[100,20,50]]
         bool_btn = [False, False, False, False]
 
@@ -50,8 +53,7 @@ class VentanasMenu(pygame.sprite.Sprite):
         for i in range(0,4):
             b1 = (posX in range(dim_btn[i][0], dim_btn[i][0] + dim_btn[i][1] + 1))
             b2 = (posY in range(dim_btn[i][0], dim_btn[i][0] + dim_btn[i][2] + 1))   
-            bool_btn[k] = (b1 and b2)           
-            #print(k)
+            bool_btn[k] = (b1 and b2) 
             k += 1         
         
         if bool_btn[0] :           #registrar
