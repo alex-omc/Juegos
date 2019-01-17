@@ -21,7 +21,7 @@ world    = pygame.display.set_mode([worldx,worldy])
 
 
 #img = pygame.image.load(os.path.join('images/pueblo/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
-backdrop = pygame.image.load("Images/fondos/" + img_background + ".jpg").convert()
+backdrop = pygame.image.load("Images/fondos/" + img_background + ".png").convert()
 backdropbox = world.get_rect()
 
 
