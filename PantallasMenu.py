@@ -4,10 +4,12 @@ import os      # help python identify your OS
 
 class VentanasMenu(pygame.sprite.Sprite):    
      
-    def __init__(self):
-        self.bakg = "bkg" #background
+    def __init__(self, bkg="login", tipo_interfaz=1):
+        self.fondo = bkg #background
+        self.tipo_interfaz = tipo_interfaz #cantidad de textbox
+
         
-    
+     
     #Crear ventana
     worldx = 1280
     worldy = 800
@@ -19,51 +21,60 @@ class VentanasMenu(pygame.sprite.Sprite):
  
 
     #cargar fondo de login
-    backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + "login" + ".jpeg").convert()
-    #backdrop = pygame.image.load("images/menu/" + "Background" + ".png").convert()
+    fondo_provisional = "login"
+    #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
+    backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
     backdropbox = world.get_rect()
 
 
-    def detectar_posicion(self, posX, posY):
+    def lugar_presionado(self, posX=0, posY=0, tif=1):
         '''
-        print(pos)
-        print("\nPosicion 0 de pos es " + str(pos[0]))
-        print("\nPosicion 1 de pos es " + str(pos[1]))
-        '''
-
-
-        '''
-        Medidas de los botones en píxeles        
+        posX --> Posición del mouse en el eje X
+        posY --> Posición del mouse en el eje Y
+        tif   --> Tipo de interface, el número depende de la 
+            cantidad de textbox que tenga el menu en presente
+        -----------------------------------------------------------------------
+        Medidas de los dim_btn en píxeles 
         btn_registrar / btn_fotgot_password 
         btn_creditos / btn_quit
         el orden es [esz.sup.izq (px), ancho(px), alto(px)]
         '''
-      
-        medidas = [[0,1,2],[0,1,2],[0,1,2],[0,1,2]]
+        continuar = True
 
-        arr_bool = [False, False, False, False]
+        dim_btn = [[0,1,2],[0,1,2],[0,1,2],[100,20,50]]
+        bool_btn = [False, False, False, False]
+
+        #Botones
         k = 0
         b1 = False
         b2 = False
         #for i in range[btn_registrar, btn_fotgot_password, btn_creditos, btn_quit]:
         for i in range(0,4):
-            b1 = (pos[0] in range(medidas[i][0], medidas[i][0] + medidas[i][1] + 1))
-            b2 = (pos[1] in range(medidas[i][0], medidas[i][0] + medidas[i][2] + 1))   
-            arr_bool[k] = (b1 and b2)
-            print(k)
+            b1 = (posX in range(dim_btn[i][0], dim_btn[i][0] + dim_btn[i][1] + 1))
+            b2 = (posY in range(dim_btn[i][0], dim_btn[i][0] + dim_btn[i][2] + 1))   
+            bool_btn[k] = (b1 and b2)           
+            #print(k)
             k += 1         
         
-        if arr_bool[0] :
-            #registrar
+        if bool_btn[0] :           #registrar
             pass
-        elif arr_bool[1]:
-            #Registrar usuario
+        elif bool_btn[1]:           #Registrar usuario
             pass
-        elif arr_bool[2]:
-            #Recuperar contraseña
+        elif bool_btn[2]:           #Recuperar contraseña
             pass
-        elif arr_bool[3]:
+        elif bool_btn[3]:           
             pygame.quit(); sys.exit()
+            continuar = False
+            
+        #Text Box
+        if (tif == 1):
+            pass
+        else:
+            #El segundo textbox debe estar con formato contraseña
+            #es decir que muestre puntos al escribir
+            pass
+
+        return continuar
             
 
 
@@ -86,20 +97,16 @@ class VentanasMenu(pygame.sprite.Sprite):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pres = True            
             
-            '''
-            print("\n\nPos tiene una longitud de " + str(len(pos)))
-            print("\n" + str(pos))
-            print("Posicion 0 de pos es " + str(pos[0]))
-            print("Posicion 1 de pos es " + str(pos[1]) + "\n")
-            '''
-
             if pres: 
-                detectar_posicion(pos[0], pos[1])
-
+                #pnt = lugar_presionado(pos[0], pos[1], self.tipo_interfaz)
+                pnt = lugar_presionado(pos[0], pos[1], 1)
+                
 
             '''
             FALTA CODIFICAR LA PARTE DE ESCRITURA EN LOS TEXTBOX
             '''
+
+
         world.blit(backdrop, backdropbox)    
         pygame.display.flip()
         clock.tick(fps)
