@@ -8,3 +8,6 @@
 
 <h2> Grupo Arte </h2>
 <ul>Ricardo Melgarejo</ul>
+
+
+<p>De las dos carpetas "images", solo sirve la que empieza con i <b>minúscula</b> </p>
