@@ -65,11 +65,18 @@ class ScreenMaster(pygame.sprite.Sprite):
             
     
     def cambiar_fondo(self, fondo):
+        '''
         #cargar fondo de login
         fondo_provisional = "login"
         #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
         backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
         backdropbox = world.get_rect()
+        '''
+        self.world = pygame.display.set_mode(self.screen_dim)
+        #cargar fondo de login        
+        self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
+        self.backdropbox = self.world.get_rect()
+
     
 
     def objeto_presionado(self, pos):        
@@ -79,7 +86,7 @@ class ScreenMaster(pygame.sprite.Sprite):
         pass
 
 
-    def ciclo(self):
+    def loopear(self):
         main = True
         while main:
             pres = False #btn izq presionado
@@ -114,31 +121,35 @@ class ScreenMaster(pygame.sprite.Sprite):
             pygame.display.flip()
             self.clock.tick(self.fps)
         
-       
+'''       
+def main():
+    print(3 * "\n")
+    print("Hola desde el main")
+    abc = ScreenMaster()
+    abc.cambiar_fondo("login")
+    abc.loopear()
+
+if __name__ == "__main__":
+    main()
+    
+'''    
     
     
-    
-    
-    
-    
-    
-    
-    
-    '''
-        #cargar fondo de login        
-        fps   = 60 
-        worldx = 1280
-        worldy = 800
-        clock = pygame.time.Clock()
-        pygame.init()
-        world = pygame.display.set_mode([self.worldx, self.worldy])        
-        fondo_provisional = "login"
-        backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
-        backdropbox = world.get_rect()
-        
-        while True:
-            world.blit(backdrop, backdropbox)    
-            pygame.display.flip()
-            clock.tick(60)
-    '''
+'''
+#cargar fondo de login        
+fps   = 60 
+worldx = 1280
+worldy = 800
+clock = pygame.time.Clock()
+pygame.init()
+world = pygame.display.set_mode([self.worldx, self.worldy])        
+fondo_provisional = "login"
+backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
+backdropbox = world.get_rect()
+
+while True:
+    world.blit(backdrop, backdropbox)    
+    pygame.display.flip()
+    clock.tick(60)
+'''
 

@@ -7,7 +7,7 @@ class VentanasMenu(pygame.sprite.Sprite):
     def __init__(self, bkg="login", tipo_interfaz=1):
         self.fondo = bkg #background
         self.tipo_interfaz = tipo_interfaz #cantidad de textbox
-        
+        ani   = 4   # animation cycles
         self.world = 0
         self.backdrop = 0
         self.backdropbox = 0
@@ -16,6 +16,7 @@ class VentanasMenu(pygame.sprite.Sprite):
         self.screen_dim = [1280, 800]
         self.clock = pygame.time.Clock()
         pygame.init()
+        self.world = pygame.display.set_mode(self.screen_dim)
 
 
         
@@ -77,12 +78,8 @@ class VentanasMenu(pygame.sprite.Sprite):
             #es decir que muestre puntos al escribir
             pass
 
-    def cambiar_fondo(self, fondo="login"):
-        #Crear ventana
+    def cambiar_fondo(self, fondo="login"):        
         
-        ani   = 4   # animation cycles        
-
-        self.world = pygame.display.set_mode(self.screen_dim)
         #cargar fondo de login        
         self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
         self.backdropbox = self.world.get_rect()
