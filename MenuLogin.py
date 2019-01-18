@@ -1,7 +1,7 @@
 import pygame
 import sys
 import os
-import PantallasMenu as pm
+import VentanasMenu as vm
 
 class MenuLogin(pm.VentanasMenu):    
     def __init__(self):
