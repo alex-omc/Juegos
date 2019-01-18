@@ -13,6 +13,7 @@ solo encontré para dibujar formas geométricas
 class ScreenMaster(pygame.sprite.Sprite): 
             
     def __init__(self):
+        self.screen_dim = [1280, 800]
         self.iniciar_pantalla()
         self.fondo = ""
         self.botones = []
@@ -23,21 +24,16 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.backdrop = 0
         self.backdropbox = 0
         self.clock = 0
-        self.fps   = 60  # frame rate
-        self.screen_dim = [1280, 800]
+        self.fps   = 60  # frame rate        
         self.clock = pygame.time.Clock()
 
-    def iniciar_pantalla(self):    
-        self.fps   = 40  # frame rate
+
+    def iniciar_pantalla(self):            
         ani   = 4   # animation cycles
         clock = pygame.time.Clock()
         pygame.init()    
-        world = pygame.display.set_mode([1280, 800])
-        #cargar fondo de login
-        fondo_provisional = "login"
-        #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
-        backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
-        backdropbox = world.get_rect()
+        world = pygame.display.set_mode(self.screen_dim)
+
         
 
 
