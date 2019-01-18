@@ -11,16 +11,36 @@ solo encontré para dibujar formas geométricas
 
 
 class ScreenMaster(pygame.sprite.Sprite): 
-
+            
     def __init__(self):
+        self.iniciar_pantalla()
         self.fondo = ""
         self.botones = []
         self.textos = []
         self.obj_pressed = []
 
-        #ani   = 4    animation cycles
-        #cambiar_fondo("login")
-    
+        self.world = 0
+        self.backdrop = 0
+        self.backdropbox = 0
+        self.clock = 0
+        self.fps   = 60  # frame rate
+        self.screen_dim = [1280, 800]
+        self.clock = pygame.time.Clock()
+
+    def iniciar_pantalla(self):    
+        self.fps   = 40  # frame rate
+        ani   = 4   # animation cycles
+        clock = pygame.time.Clock()
+        pygame.init()    
+        world = pygame.display.set_mode([1280, 800])
+        #cargar fondo de login
+        fondo_provisional = "login"
+        #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
+        backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
+        backdropbox = world.get_rect()
+        
+
+
     def add_btn(self, pos=(0,0), ancho=20, alto=10, fondo=(0,255,0), texto="abc"):
         #los a=B son el valor predeterminado en caso no se envíe el parámetro
         #fondo también puede ser una imagen, para el caso de los personajes y escenarios 
@@ -45,47 +65,56 @@ class ScreenMaster(pygame.sprite.Sprite):
             
     
     def cambiar_fondo(self, fondo):
-        pass
+        #cargar fondo de login
+        fondo_provisional = "login"
+        #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
+        backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
+        backdropbox = world.get_rect()
     
+
     def objeto_presionado(self, pos):        
         #devuelve si se presionó o no un objeto        
         #De ser el caso se modifica el valor de la variable self.obj_pressed
         #y el boolean devuelto es False
         pass
 
-    main = True
-    while main:
-        pres = False #btn izq presionado
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit(); sys.exit()
-                main = False            
-            
-            #Verificar si el botón del mouse está presionado
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pres = True
-            
-            #######################
-            #######################
-            ###presionar  enter####
-            #######################
-            #######################    
+    def ciclo(self):
+        main = True
+        while main:
+            pres = False #btn izq presionado
 
-        if pres:
-            #retorna una tupla (x,y) de las coordenadas del mouse
-            pos = pygame.mouse.get_pos()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit(); sys.exit()
+                    main = False            
+                
+                #Verificar si el botón del mouse está presionado
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pres = True
+                
+                #######################
+                #######################
+                ###presionar  enter####
+                #######################
+                #######################    
 
-            #verificar si se presionó sobre un botón o caja de texto
-            #realizar la acción correspondiente
-            #Posiblemente main = False
-        '''
-        Mantener viva la ventana
-        '''
-            
+            if pres:
+                #retorna una tupla (x,y) de las coordenadas del mouse
+                pos = pygame.mouse.get_pos()
 
+                #verificar si se presionó sobre un botón o caja de texto
+                #realizar la acción correspondiente
+                #Posiblemente main = False
+            '''
+            Mantener viva la ventana
+            '''
+                
+            self.world.blit(self.backdrop, self.backdropbox)    
+            pygame.display.flip()
+            self.clock.tick(self.fps)
         
-        
+       
     
     
     
