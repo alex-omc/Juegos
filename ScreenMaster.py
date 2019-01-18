@@ -16,9 +16,11 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.screen_dim = [1280, 800]
         self.iniciar_pantalla()
         self.fondo = ""
-        self.botones = []
-        self.textos = []
-        self.obj_pressed = []
+        self.bool_sgt_pnt = False #Cambiar a la siguiente pantalla
+        self.botones = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
+        self.textos = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
+        self.obj_pressed = None #Indica que objeto está siendo presionado en un momento determinado
+        self.mensaje = ["mensaje", 0] #es el texto que se va a enviar al motor (0), y de ser el caso reenviado al servidor(1)
 
         self.world = 0
         self.backdrop = 0
@@ -37,9 +39,8 @@ class ScreenMaster(pygame.sprite.Sprite):
         
 
 
-    def add_btn(self, pos=(0,0), ancho=20, alto=10, fondo=(0,255,0), texto="abc"):
+    def add_btn(self, pos=(0,0), ancho=20, alto=10, fondo="", texto="abc"):
         #los a=B son el valor predeterminado en caso no se envíe el parámetro
-        #fondo también puede ser una imagen, para el caso de los personajes y escenarios 
         '''
         Ete video puede sere de ayuda
         https://www.youtube.com/watch?v=4_9twnEduFA&lc=Ugx9T3FeyrQZpRJV_wl4AaABAg
@@ -61,31 +62,26 @@ class ScreenMaster(pygame.sprite.Sprite):
             
     
     def cambiar_fondo(self, fondo):
-        '''
-        #cargar fondo de login
-        fondo_provisional = "login"
-        #backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + str(self.fondo) + ".jpeg").convert()
-        backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
-        backdropbox = world.get_rect()
-        '''
-        self.world = pygame.display.set_mode(self.screen_dim)
-        #cargar fondo de login        
+        self.world = pygame.display.set_mode(self.screen_dim)   
         self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
         self.backdropbox = self.world.get_rect()
 
     
 
-    def objeto_presionado(self, pos):        
-        #devuelve si se presionó o no un objeto        
+    def lugar_funcional(self, pos):        
+        #devuelve si se presionó o no un objeto     
         #De ser el caso se modifica el valor de la variable self.obj_pressed
-        #y el boolean devuelto es False
+        pass
+
+    def accion_obj_presionado(self, obj):
         pass
 
 
     def loopear(self):
         main = True
         while main:
-            pres = False #btn izq presionado
+            pres = False # Botón izq del mouse presionado
+            str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -105,18 +101,25 @@ class ScreenMaster(pygame.sprite.Sprite):
             if pres:
                 #retorna una tupla (x,y) de las coordenadas del mouse
                 pos = pygame.mouse.get_pos()
+                self.lugar_funcional(pos)
+                if self.obj_pressed != None :
+                    self.accion_obj_presionado(self.obj_pressed)
+                self.obj_pressed = None
 
-                #verificar si se presionó sobre un botón o caja de texto
-                #realizar la acción correspondiente
+            if self.bool_sgt_pnt:
+                self.cambiar_fondo(str_sgt_pnt)
                 #Posiblemente main = False
-            '''
-            Mantener viva la ventana
-            '''
-                
+            
+            
+            #Mantener viva la ventana                
             self.world.blit(self.backdrop, self.backdropbox)    
             pygame.display.flip()
             self.clock.tick(self.fps)
-        
+
+
+
+
+
 '''       
 def main():
     print(3 * "\n")
@@ -129,23 +132,3 @@ if __name__ == "__main__":
     main()
     
 '''    
-    
-    
-'''
-#cargar fondo de login        
-fps   = 60 
-worldx = 1280
-worldy = 800
-clock = pygame.time.Clock()
-pygame.init()
-world = pygame.display.set_mode([self.worldx, self.worldy])        
-fondo_provisional = "login"
-backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo_provisional + ".jpeg").convert()    
-backdropbox = world.get_rect()
-
-while True:
-    world.blit(backdrop, backdropbox)    
-    pygame.display.flip()
-    clock.tick(60)
-'''
-
