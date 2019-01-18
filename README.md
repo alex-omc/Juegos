@@ -15,5 +15,3 @@
 <h2>Clase Engine</h2>
 python Engine.py hero Background
 
-<h2>Log in</h2>
-python MenuLogin.py
