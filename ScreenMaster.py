@@ -1,6 +1,7 @@
 import pygame  # load pygame keywords
 import sys     # let  python use your file system
 import os      # help python identify your OS
+from prejuego import *
 
 '''
 pygame debe tener librerías con estas funcionalidades, pero 
@@ -48,7 +49,7 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.backdropbox = self.world.get_rect()
 
     
-    def lugar_funcional(self, pos, regiones):        
+    def lugar_funcional(self, pos, regiones=[]):        
         #pos --> posición del mouse (x,y)
         #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
         #devuelve si se presionó o no un objeto     
