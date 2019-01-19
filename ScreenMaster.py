@@ -17,7 +17,7 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.iniciar_pantalla()
         self.fondo = ""
         self.bool_sgt_pnt = False #Cambiar a la siguiente pantalla
-        self.botones = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
+        self.botones = [] #Almacenará el objeto boton como imagen, y su posición (x, y)
         self.textos = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
         self.obj_pressed = None #Indica que objeto está siendo presionado en un momento determinado
         self.mensaje = ["mensaje", 0] #es el texto que se va a enviar al motor (0), y de ser el caso reenviado al servidor(1)
@@ -34,41 +34,23 @@ class ScreenMaster(pygame.sprite.Sprite):
         ani   = 4   # animation cycles
         clock = pygame.time.Clock()
         pygame.init()    
-        world = pygame.display.set_mode(self.screen_dim)
-
-        
 
 
-    def add_btn(self, pos=(0,0), ancho=20, alto=10, fondo="", texto="abc"):
-        #los a=B son el valor predeterminado en caso no se envíe el parámetro
-        '''
-        Ete video puede sere de ayuda
-        https://www.youtube.com/watch?v=4_9twnEduFA&lc=Ugx9T3FeyrQZpRJV_wl4AaABAg
-        O el que pasó mario
-        '''       
+    def dibujar_botones(self, regiones=[]):
+        #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
         pass
+     
 
-
-    def add_txt(self, pos=(0,0), ancho=20, alto=10, tipo=0):
-        # tipo 0 --> texto normal
-        # tipo 1 --> contraseña
-        pass
-
-
-    def borrar_todo(self):
-        #self.botones = []
-        #self.textos = []
-        pass
-            
-    
     def cambiar_fondo(self, fondo):
-        self.world = pygame.display.set_mode(self.screen_dim)   
+        self.world = pygame.display.set_mode(self.screen_dim)
+        pygame.display.set_caption('Abajo los Corruptos')  
         self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
         self.backdropbox = self.world.get_rect()
 
     
-
-    def lugar_funcional(self, pos):        
+    def lugar_funcional(self, pos, regiones):        
+        #pos --> posición del mouse (x,y)
+        #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
         #devuelve si se presionó o no un objeto     
         #De ser el caso se modifica el valor de la variable self.obj_pressed
         pass
@@ -112,6 +94,7 @@ class ScreenMaster(pygame.sprite.Sprite):
             
             
             #Mantener viva la ventana                
+            self.dibujar_botones()
             self.world.blit(self.backdrop, self.backdropbox)    
             pygame.display.flip()
             self.clock.tick(self.fps)
