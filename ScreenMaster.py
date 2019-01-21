@@ -1,7 +1,7 @@
 import pygame  # load pygame keywords
 import sys     # let  python use your file system
 import os      # help python identify your OS
-from prejuego import *
+from prejuego import Login
 
 '''
 pygame debe tener librerías con estas funcionalidades, pero 
@@ -35,18 +35,22 @@ class ScreenMaster(pygame.sprite.Sprite):
         ani   = 4   # animation cycles
         clock = pygame.time.Clock()
         pygame.init()    
-
-
-    def dibujar_botones(self, regiones=[]):
-        #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
-        pass
-     
+   
 
     def cambiar_fondo(self, fondo):
         self.world = pygame.display.set_mode(self.screen_dim)
         pygame.display.set_caption('Abajo los Corruptos')  
         self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
         self.backdropbox = self.world.get_rect()
+
+    def cargar_botones(self, regiones=[]):
+        self.botones = regiones.btns
+
+    def dibujar_botones(self, regiones=[]):
+        #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
+        for i in self.botones:
+            self.world.blit(i[0], i[1])
+    
 
     
     def lugar_funcional(self, pos, regiones=[]):        
@@ -62,6 +66,11 @@ class ScreenMaster(pygame.sprite.Sprite):
 
     def loopear(self):
         main = True
+        
+        jeanpi = Login.Login()
+        self.botones = jeanpi.btns
+        #jeanpi.cargar_imagenes()
+        jp = jeanpi.btns
         while main:
             pres = False # Botón izq del mouse presionado
             str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
@@ -94,8 +103,8 @@ class ScreenMaster(pygame.sprite.Sprite):
                 #Posiblemente main = False
             
             
-            #Mantener viva la ventana                
-            self.dibujar_botones()
+            #Mantener viva la ventana      
+            self.dibujar_botones(jp)
             self.world.blit(self.backdrop, self.backdropbox)    
             pygame.display.flip()
             self.clock.tick(self.fps)
