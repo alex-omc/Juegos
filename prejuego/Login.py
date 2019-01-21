@@ -1,37 +1,49 @@
 import pygame
-import sys
 import os
 
 '''
-Orden de los valores
-(posicion), (ancho, alto), fondo, texto
-
-btn_registrar = [(0,0),(0,0),(0,0,0),"Registrar"]
-btn_olvide = [(0,0),(0,0),(0,0,0),"Olvide contraseña"]
-btn_creditos = [(0,0),(0,0),(0,0,0),"creditos"]
-btn_salir = [(0,0),(0,0),(0,0,0),"Salir"]
-botones = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
+MARIO
+Cuando ya estén las imágenes de los botones, modificas los números 
+para que tengan el tamaño y posición adecuados
 '''
+class Login():
+    def __init__(self):
+        self.imgs=[]
+        self.btns = []
+        self.cargar_imagenes()
+        self.dibujar_imagenes()
+    
+    def cargar_imagenes(self):
+        #Cargar a memoria las imágenes de los botones
+        btn_0 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        btn_1 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        btn_2 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        btn_3 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
 
-btn_registrar = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
-btn_olvide = pygame.image.load(os.getcwd() + "/images/botones/.png")
-btn_creditos = pygame.image.load(os.getcwd() + "/images/botones/.png")
-btn_salir = pygame.image.load(os.getcwd() + "/images/botones/salir.png")
+        '''
+        #Darles el tamaño apropiado
+        Modificar los tamaños
+        '''
+        sizes = [(100,40),(100,40),(100,40),(100,40)]
+        btn_registrar = pygame.transform.scale(btn_0, sizes[0])
+        btn_olvide = pygame.transform.scale(btn_1, sizes[1])
+        btn_creditos = pygame.transform.scale(btn_2, sizes[2])
+        btn_salir = pygame.transform.scale(btn_3, sizes[3])
+        self.imgs = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
 
 
+    def dibujar_imagenes(self):
+        '''
+        #(Boton, pos(x,y))
+        Modificar las posiciones
+        '''
+        pcs = [(10,10),(50,50),(100,100),(150,150)] 
+        b1 = [self.imgs[0], pcs[0]] 
+        b2 = [self.imgs[1], pcs[1]]
+        b3 = [self.imgs[2], pcs[2]]
+        b4 = [self.imgs[3], pcs[3]]
+        self.btns = [b1, b2, b3, b4]
+
+    
 
 
-
-
-
-
-
-
-
-
-'''
-Orden de los valores
-(posicion), (ancho, alto), tipo
-    tipo 0 usuario
-    tipo 1 password
-'''
