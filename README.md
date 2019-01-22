@@ -17,4 +17,4 @@
 <ul>DONAYRE MEDINA CARLO STEPHANO</ul>
 <ul>MELGAREJO PAUCAR RICARDO ANTONIO</ul>
   
-<p>Por lo tanto queda a responsabilidad de ellos cualquier infracción de copyright </p>
+<p>Por lo tanto queda a responsabilidad de ellos cualquier infracción de copyright respecto a los mismos</p>
