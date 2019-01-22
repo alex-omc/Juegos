@@ -37,7 +37,7 @@ class Login():
         self.imgs = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
 
 
-    def md5_psw(self, psw=""):
+    def sha256_psw(self, psw=""):
         #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing
         psw_hash = hashlib.sha256(psw.encode('utf-8'))        
         return psw_hash.hexdigest()
