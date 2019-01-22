@@ -6,9 +6,6 @@
 <ul>Paolo Flores -- paoloflores</ul>
 <ul>Mario Llaque -- Dkad96</ul>
 
-<h2> Apuntes </h2>
-<p>Por algún motivo las imágenes que actúan de botones se están renderizando por debajo del fondo</p>
-
 <h2>Comandos para la ejecución</h2>
 <p>python Engine.py hero Background</p>
 <p>python AbajoLosCorruptos.py</p>
