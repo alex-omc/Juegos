@@ -1,5 +1,8 @@
-import pygame
+import cryptography
+import hashlib
 import os
+import pygame
+
 
 '''
 MARIO
@@ -43,6 +46,8 @@ class Login():
         b4 = [self.imgs[3], self.pcs[3]]
         self.btns = [b1, b2, b3, b4]
 
+    def md5_psw(self, psw=""):
+        psw_hash = hashlib.sha256(psw.encode('utf-8'))        
+        return psw_hash.hexdigest()
+
     
-
-
