@@ -44,11 +44,6 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.backdropbox = self.world.get_rect()
 
 
-    '''def cargar_botones(self, img_botones=[]):
-        self.botones = img_botones.btns'''
-
-
-
     def dibujar_botones(self, img_botones=[], pocs = [] ):        
         k = len(img_botones)
                 
@@ -57,7 +52,7 @@ class ScreenMaster(pygame.sprite.Sprite):
     
 
     
-    def lugar_funcional(self, pos, img_pos=[], img_tam=[]):        
+    def lugar_funcional(self, pos, img_pos=[], img_tam=[]):
         #devuelve si se presionó o no un objeto     
         #pos --> posición del mouse (x,y)
         #img_botones = [esquina, dimensiones]
@@ -66,15 +61,28 @@ class ScreenMaster(pygame.sprite.Sprite):
         rango_y = [0,0]
         nr = len(img_pos) #número de img_botones
         
+        #¿Los botones son del mismo tamaño?
+        nt = len(img_tam)
+        largo = 0
+        alto = 0
+
+
         #El mouse se encuentra en el rango definido previamente
         cx = False 
         cy = False
 
         #verificar cada región funcional (botones, text_box)
         for i in range(nr):
+            if nt == 1:
+                largo = img_tam[0][0]
+                alto = img_tam[0][1]
+            else:
+                largo = img_tam[i][0]
+                alto = img_tam[i][1]
+
             #[pos_en_array        (x,y)]
-            rango_x = [img_pos[i][0], img_pos[i][0] + img_tam[i][0]]
-            rango_y = [img_pos[i][1], img_pos[i][1] + img_tam[i][1]]
+            rango_x = [img_pos[i][0], img_pos[i][0] + largo]
+            rango_y = [img_pos[i][1], img_pos[i][1] + alto]
             
             #definir booleanos
             cx = (pos[0] >= rango_x[0]) and (pos[0] <= rango_x[1] + 1)
