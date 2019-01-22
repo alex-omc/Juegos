@@ -37,9 +37,9 @@ class ScreenMaster(pygame.sprite.Sprite):
         pygame.init()    
    
 
-    def cambiar_fondo(self, fondo):
+    def cambiar_fondo(self, fondo, titulo="Abajo los corruptos"):
         self.world = pygame.display.set_mode(self.screen_dim)
-        pygame.display.set_caption('Abajo los Corruptos')  
+        pygame.display.set_caption(titulo)  
         self.backdrop = pygame.image.load(os.getcwd() + "/images/menu/" + fondo + ".jpeg").convert()    
         self.backdropbox = self.world.get_rect()
 
@@ -54,9 +54,38 @@ class ScreenMaster(pygame.sprite.Sprite):
 
     
     def lugar_funcional(self, pos, regiones=[]):        
-        #pos --> posición del mouse (x,y)
-        #regiones lista de [obj, (ezq sup izq), (ancho, alto)]
         #devuelve si se presionó o no un objeto     
+        #pos --> posición del mouse (x,y)
+        #regiones = [esquina, dimensiones]
+        
+        rango_x = [0,0]
+        rango_y = [0,0]
+        nr = len(regiones) #número de regiones
+        
+        #El mouse se encuentra en el rango definido previamente
+        cx = False 
+        cy = False
+
+        #verificar cada región funcional (botones, text_box)
+        for i in range(nr):
+            #[pos_en_regiones       esq/dim         (x,y)]
+            rango_x = [regiones[i][0][0], regiones[i][0][0] + regiones[i][1][0]]
+            rango_y = [regiones[i][0][1], regiones[i][0][1] + regiones[i][1][1]]
+            
+            #definir booleanos
+            cx = () and ()
+            cy = () and ()
+
+
+            #compara la posición del mouse con los rangos establecidos
+            if (cx and cy):
+                pass
+
+            
+        #print("Se hizo click")
+        
+        
+        
         #De ser el caso se modifica el valor de la variable self.obj_pressed
         pass
 
@@ -64,13 +93,14 @@ class ScreenMaster(pygame.sprite.Sprite):
         pass
 
 
-    def loopear(self):
-        main = True
+    def loopear(self, repetir=True):
+        main = repetir
         
-        jeanpi = Login.Login()
-        self.botones = jeanpi.btns
-        #jeanpi.cargar_imagenes()
-        jp = jeanpi.btns
+        sc_login = Login.Login()
+        self.botones = sc_login.btns
+        #sc_login.cargar_imagenes()
+        jp = sc_login.btns
+        
         while main:
             pres = False # Botón izq del mouse presionado
             str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
@@ -93,7 +123,7 @@ class ScreenMaster(pygame.sprite.Sprite):
             if pres:
                 #retorna una tupla (x,y) de las coordenadas del mouse
                 pos = pygame.mouse.get_pos()
-                self.lugar_funcional(pos)
+                self.lugar_funcional(pos, [sc_login.pcs, sc_login.sizes])
                 if self.obj_pressed != None :
                     self.accion_obj_presionado(self.obj_pressed)
                 self.obj_pressed = None

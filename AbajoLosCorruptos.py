@@ -3,10 +3,23 @@ import ScreenMaster as sm
 
 
 def main():
-    abc = sm.ScreenMaster()
-    abc.cambiar_fondo("login")
-    abc.loopear()
+    prejuego = True
+    secuencia_principal = [('login','Abajo los corruptos'),
+                          ('personajes','Abajo los corruptos'),
+                          ('escenario','Abajo los corruptos')]
 
+
+    abc = sm.ScreenMaster()
+    abc.cambiar_fondo(secuencia_principal[0][0],secuencia_principal[0][1])
+    
+    while prejuego:
+        abc.loopear(True)
+
+    #ejecutar ek engine
+
+
+
+    
 
 if __name__ == "__main__":
     main()
