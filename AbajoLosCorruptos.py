@@ -11,15 +11,14 @@ def main():
 
     abc = sm.ScreenMaster()
     abc.cambiar_fondo(secuencia_principal[0][0],secuencia_principal[0][1])
-    
-    while prejuego:
-        abc.loopear(True)
+        
+    abc.loopear(prejuego)
 
     #ejecutar ek engine
 
 
 
-    
+
 
 if __name__ == "__main__":
     main()
