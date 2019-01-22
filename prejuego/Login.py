@@ -11,8 +11,8 @@ para que tengan el tamaño y posición adecuados
 '''
 class Login():
     def __init__(self):
-        self.imgs=[]
-        self.btns = []
+        self.imgs=[] #imágenes de los botones
+        self.btns = [] #bones[(imagen, posicion)]
         self.pcs = [(10,10),(50,50),(100,100),(150,150)]    #posición de la esquina superior izquierda
         self.sizes = [(100,40),(100,40),(100,40),(100,40)]  #largo x alto
         self.cargar_imagenes()
@@ -47,7 +47,7 @@ class Login():
         self.btns = [b1, b2, b3, b4]
 
     def md5_psw(self, psw=""):
+        #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing
         psw_hash = hashlib.sha256(psw.encode('utf-8'))        
         return psw_hash.hexdigest()
 
-    
