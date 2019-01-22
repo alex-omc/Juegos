@@ -13,11 +13,12 @@ class Login():
     def __init__(self):
         self.imgs=[] #imágenes de los botones
         self.btns = [] #bones[(imagen, posicion)]
-        self.pcs = [(10,10),(50,50),(100,100),(150,150)]    #posición de la esquina superior izquierda
-        self.sizes = [(100,40),(100,40),(100,40),(100,40)]  #largo x alto
+        self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
+        self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
         self.cargar_imagenes()
-        self.dibujar_imagenes()
+        #self.dibujar_imagenes()
     
+
     def cargar_imagenes(self):
         #Cargar a memoria las imágenes de los botones
         btn_0 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
