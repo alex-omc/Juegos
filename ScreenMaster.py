@@ -73,20 +73,21 @@ class ScreenMaster(pygame.sprite.Sprite):
             rango_y = [regiones[i][0][1], regiones[i][0][1] + regiones[i][1][1]]
             
             #definir booleanos
-            cx = () and ()
-            cy = () and ()
+            cx = (pos[0] >= rango_x[0]) and (pos[0] <= rango_x[1] + 1)
+            cy = (pos[1] >= rango_y[0]) and (pos[1] <= rango_y[1] + 1)
 
 
             #compara la posición del mouse con los rangos establecidos
             if (cx and cy):
-                pass
+                print("Se ha presionado en un lugar funcional")
+                #Se modifica el valor de la variable self.obj_pressed        
 
             
-        #print("Se hizo click")
+
         
         
         
-        #De ser el caso se modifica el valor de la variable self.obj_pressed
+        
         pass
 
     def accion_obj_presionado(self, obj):
