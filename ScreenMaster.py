@@ -133,9 +133,9 @@ class ScreenMaster(pygame.sprite.Sprite):
                 #Posiblemente main = False
             
             
-            #Mantener viva la ventana      
-            self.dibujar_botones(sc_login.imgs, sc_login.pcs)
+            #Mantener viva la ventana 
             self.world.blit(self.backdrop, self.backdropbox)    
+            self.dibujar_botones(sc_login.imgs, sc_login.pcs)
             pygame.display.flip()
             self.clock.tick(self.fps)
 
