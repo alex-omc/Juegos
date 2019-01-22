@@ -6,9 +6,15 @@
 <ul>Paolo Flores -- paoloflores</ul>
 <ul>Mario Llaque -- Dkad96</ul>
 
+<p> </p>
+<p> </p>
+
 <h2>Comandos para la ejecución</h2>
 <p>python Engine.py hero Background</p>
 <p>python AbajoLosCorruptos.py</p>
+
+<p> </p>
+<p> </p>
 
 <h2>Disclaimer</h2>
 <p>Las imágenes y sonidos son suministradas por el grupo encargado del arte, conformado por </p>
