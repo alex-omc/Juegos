@@ -16,7 +16,7 @@ class Login():
         self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
         self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
         self.cargar_imagenes()
-        #self.dibujar_imagenes()
+
     
 
     def cargar_imagenes(self):
@@ -36,16 +36,6 @@ class Login():
         btn_salir = pygame.transform.scale(btn_3, self.sizes[3])
         self.imgs = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
 
-    def dibujar_imagenes(self):
-        '''
-        #(Boton, pos(x,y))
-        Modificar las posiciones
-        '''        
-        b1 = [self.imgs[0], self.pcs[0]] 
-        b2 = [self.imgs[1], self.pcs[1]]
-        b3 = [self.imgs[2], self.pcs[2]]
-        b4 = [self.imgs[3], self.pcs[3]]
-        self.btns = [b1, b2, b3, b4]
 
     def md5_psw(self, psw=""):
         #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing
