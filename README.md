@@ -1,10 +1,10 @@
 <h1> Ing SW2 - ULima - Abajo los corruptos </h1>
 
 <h2> Grupo Engine </h2>
-<ul>Alexander Mendez</ul>
-<ul>Alvaro Samanamud</ul>
-<ul>Paolo Flores</ul>
-<ul>Mario Llaque</ul>
+<ul>Alexander Mendez -- alex-omc</ul>
+<ul>Alvaro Samanamud -- whisperkick</ul>
+<ul>Paolo Flores -- paoloflores</ul>
+<ul>Mario Llaque -- Dkad96</ul>
 
 <h2> Grupo Arte </h2>
 <ul>Ricardo Melgarejo</ul>
