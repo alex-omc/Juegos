@@ -9,3 +9,12 @@
 <h2>Comandos para la ejecución</h2>
 <p>python Engine.py hero Background</p>
 <p>python AbajoLosCorruptos.py</p>
+
+<h2>Disclaimer</h2>
+<p>Las imágenes y sonidos son suministradas por el grupo encargado del arte, conformado por </p>
+<ul>BISSO BERNAL CARLOS MANUEL</ul>
+<ul>DA FIENO PAZ MAXIMO JESUS</ul>
+<ul>DONAYRE MEDINA CARLO STEPHANO</ul>
+<ul>MELGAREJO PAUCAR RICARDO ANTONIO</ul>
+  
+<p>Por lo tanto queda a responsabilidad de ellos cualquier infracción de copyright </p>
