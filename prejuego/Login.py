@@ -12,7 +12,6 @@ para que tengan el tamaño y posición adecuados
 class Login():
     def __init__(self):
         self.imgs=[] #imágenes de los botones
-        self.btns = [] #bones[(imagen, posicion)]
         self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
         self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
         self.cargar_imagenes()
