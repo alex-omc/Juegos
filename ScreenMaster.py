@@ -51,20 +51,20 @@ class ScreenMaster(pygame.sprite.Sprite):
 
     def dibujar_botones(self, img_botones=[], pocs = [] ):        
         k = len(img_botones)
-        
+                
         for i in range(k):
             self.world.blit(img_botones[i], pocs[i])
     
 
     
-    def lugar_funcional(self, pos, img_botones=[]):        
+    def lugar_funcional(self, pos, img_pos=[], img_tam=[]):        
         #devuelve si se presionó o no un objeto     
         #pos --> posición del mouse (x,y)
         #img_botones = [esquina, dimensiones]
         
         rango_x = [0,0]
         rango_y = [0,0]
-        nr = len(img_botones) #número de img_botones
+        nr = len(img_pos) #número de img_botones
         
         #El mouse se encuentra en el rango definido previamente
         cx = False 
@@ -72,9 +72,9 @@ class ScreenMaster(pygame.sprite.Sprite):
 
         #verificar cada región funcional (botones, text_box)
         for i in range(nr):
-            #[pos_en_regiones       esq/dim         (x,y)]
-            rango_x = [img_botones[i][0][0], img_botones[i][0][0] + img_botones[i][1][0]]
-            rango_y = [img_botones[i][0][1], img_botones[i][0][1] + img_botones[i][1][1]]
+            #[pos_en_array        (x,y)]
+            rango_x = [img_pos[i][0], img_pos[i][0] + img_tam[i][0]]
+            rango_y = [img_pos[i][1], img_pos[i][1] + img_tam[i][1]]
             
             #definir booleanos
             cx = (pos[0] >= rango_x[0]) and (pos[0] <= rango_x[1] + 1)
@@ -83,7 +83,7 @@ class ScreenMaster(pygame.sprite.Sprite):
 
             #compara la posición del mouse con los rangos establecidos
             if (cx and cy):
-                print("Se ha presionado en un lugar funcional")
+                print("Se ha presionado el lugar funcional " + str(i))
                 #Se modifica el valor de la variable self.obj_pressed
                 #self.obj_pressed = 
 
@@ -96,6 +96,7 @@ class ScreenMaster(pygame.sprite.Sprite):
         main = repetir
         
         sc_login = Login.Login()
+        sc_login.cargar_imagenes()
         self.botones = sc_login.imgs
         
         
@@ -121,7 +122,8 @@ class ScreenMaster(pygame.sprite.Sprite):
             if pres:
                 #retorna una tupla (x,y) de las coordenadas del mouse
                 pos = pygame.mouse.get_pos()
-                self.lugar_funcional(pos, [sc_login.pcs, sc_login.sizes])
+                #print(str(pos))
+                self.lugar_funcional(pos, sc_login.pcs, sc_login.sizes)
                 if self.obj_pressed != None :
                     self.accion_obj_presionado(self.obj_pressed)
                 self.obj_pressed = None
