@@ -15,7 +15,6 @@ class Login():
         self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
         self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
         self.cargar_imagenes()
-
     
 
     def cargar_imagenes(self):
@@ -36,8 +35,34 @@ class Login():
         self.imgs = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
 
 
+    def ejecutar_funcion_n(self, n, otros=[]):        
+        if n == 0: # Iniciar sesión
+            #Obtener los textos de los input box
+            usr = ""
+            psw = ""
+            
+            #Encriptar usuario y contraseña
+            return self.encriptar_usr_psw(otros[0], usr, psw)            
+        elif n == 1: # Olvide contraseña
+            pass
+        elif n == 2: # Nuevo usuario
+            pass
+        elif n == 3: # Salir
+            pass
+
+
+
+    def encriptar_usr_psw(self, clave, usuario='', psw=''):
+        #Calcular el hash de la contraseña
+        psw = self.sha256_psw(psw)
+        #Encriptado asimétrico con la clave pública suministrada por el server
+        usr_enc = None
+        psw_enc = None
+        
+        return (usr_enc, psw_enc)
+        
+
     def sha256_psw(self, psw=""):
         #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing
         psw_hash = hashlib.sha256(psw.encode('utf-8'))        
         return psw_hash.hexdigest()
-
