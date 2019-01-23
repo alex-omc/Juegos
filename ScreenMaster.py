@@ -1,7 +1,6 @@
 import pygame  # load pygame keywords
 import sys     # let  python use your file system
 import os      # help python identify your OS
-from prejuego import Login
 
 '''
 pygame debe tener librerías con estas funcionalidades, pero 
@@ -32,6 +31,10 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.clock = pygame.time.Clock()
 
 
+    def set_objeto(self, nuevo_objeto):
+        self.objeto = nuevo_objeto
+
+
     def iniciar_pantalla(self):            
         ani   = 4   # animation cycles
         clock = pygame.time.Clock()
@@ -51,13 +54,11 @@ class ScreenMaster(pygame.sprite.Sprite):
         for i in range(k):
             self.world.blit(img_botones[i], pocs[i])
     
-
     
     def lugar_funcional(self, pos, img_pos=[], img_tam=[]):
         #devuelve si se presionó o no un objeto     
         #pos --> posición del mouse (x,y)
         #img_botones = [esquina, dimensiones]
-        
         rango_x = [0,0]
         rango_y = [0,0]
         nr = len(img_pos) #número de img_botones
@@ -93,28 +94,32 @@ class ScreenMaster(pygame.sprite.Sprite):
             #compara la posición del mouse con los rangos establecidos
             if (cx and cy):
                 print("Se ha presionado el lugar funcional " + str(i))
+                #print(str(type(self.objeto)))
                 #Se modifica el valor de la variable self.obj_pressed
                 
                 if i == 0:
-                    if (type(self.objeto) == Login.Login()):
-                        self.objeto.ejecutar_funcion_n(i, ['usuario', 'password']) 
+                    if (str(type(self.objeto)) == "<class 'prejuego.Login.Login'>"):
+                        #Obtener de los inputbox
+                        usuario = ''
+                        psw = ''
+                        print('enviar usuario y contraseña')
+                        self.objeto.ejecutar_funcion_n(i, [usuario, psw]) 
                     else:
                         #pasar a la siguiente pantalla
+                        #self.bool_sgt_pnt = True
                         pass
 
-    # Deprecado, no se usará; sin embargo no se borra
-    # por si más adelante resulta ser necesario
-    def loopear(self, repetir=True):
-        main = repetir
+
+    def loopear(self, repetir, fondo):        
         
         sc_login = self.objeto
         sc_login.cargar_imagenes()
-        self.botones = sc_login.imgs
+        #self.botones = sc_login.imgs
+        #str_sgt_pnt = 'login' #Nombre del siguiente fondo a cargar
         
-        
-        while main:
+        while repetir:
             pres = False # Botón izq del mouse presionado
-            str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
+            
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -141,7 +146,7 @@ class ScreenMaster(pygame.sprite.Sprite):
                 self.obj_pressed = None
 
             if self.bool_sgt_pnt:
-                self.cambiar_fondo(str_sgt_pnt)
+                self.cambiar_fondo(fondo)
                 #Posiblemente main = False
             
             
@@ -152,16 +157,16 @@ class ScreenMaster(pygame.sprite.Sprite):
             self.clock.tick(self.fps)
 
 
-    def loopear_2(self, repetir):
+    #Por algún motivo consume muchos más recursos
+    def loopear_2(self, repetir, fondo=''):
         
-        sc_prejuego = self.objeto
-        sc_prejuego.cargar_imagenes()
-        self.botones = sc_prejuego.imgs
+        #sc_prejuego = self.objeto
+        #sc_prejuego.cargar_imagenes()
+        #self.botones = self.objeto.imgs
         
         
         if repetir:
-            pres = False # Botón izq del mouse presionado
-            str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
+            pres = False # Botón izq del mouse presionado            
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -182,16 +187,16 @@ class ScreenMaster(pygame.sprite.Sprite):
                 #retorna una tupla (x,y) de las coordenadas del mouse
                 pos = pygame.mouse.get_pos()
                 #print(str(pos))
-                self.lugar_funcional(pos, sc_prejuego.pcs, sc_prejuego.sizes)
+                self.lugar_funcional(pos, self.objeto.pcs, self.objeto.sizes)
 
             if self.bool_sgt_pnt:
-                self.cambiar_fondo(str_sgt_pnt)
+                self.cambiar_fondo(fondo)
                 #Posiblemente main = False
             
             
             #Mantener viva la ventana 
             self.world.blit(self.backdrop, self.backdropbox)    
-            self.dibujar_botones(sc_prejuego.imgs, sc_prejuego.pcs)
+            self.dibujar_botones(self.objeto.imgs, self.objeto.pcs)
             pygame.display.flip()
             self.clock.tick(self.fps)
 
