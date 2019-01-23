@@ -16,14 +16,15 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.objeto = objeto
         self.screen_dim = [1280, 800]
         self.iniciar_pantalla()
-        self.fondo = ""
-        self.bool_sgt_pnt = False #Cambiar a la siguiente pantalla
+        self.fondo = ''
+        self._bool_sgt_pnt = False #Cambiar a la siguiente pantalla
         #self.botones = [] #Almacenará el objeto boton como imagen
         #self.textos = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
         self.obj_pressed = None #Indica que objeto está siendo presionado en un momento determinado
-        self.mensaje = ["mensaje", 0] #es el texto que se va a enviar al motor (0), y de ser el caso reenviado al servidor(1)
+        self.result_fun_n = None
+        self.mensaje = [None, 0] #es el texto que se va a enviar al motor (0), y de ser el caso reenviado al servidor(1)
 
-        self.world = 0
+        self.world = 0 
         self.backdrop = 0
         self.backdropbox = 0
         self.clock = 0
@@ -33,6 +34,10 @@ class ScreenMaster(pygame.sprite.Sprite):
 
     def set_objeto(self, nuevo_objeto):
         self.objeto = nuevo_objeto
+
+
+    def set_bool_sgt_pnt(self, b):
+        self._bool_sgt_pnt = b
 
 
     def iniciar_pantalla(self):            
@@ -102,15 +107,17 @@ class ScreenMaster(pygame.sprite.Sprite):
                         #Obtener de los inputbox
                         usuario = ''
                         psw = ''
-                        print('enviar usuario y contraseña')
-                        self.objeto.ejecutar_funcion_n(i, [usuario, psw]) 
+                        #print('enviar usuario y contraseña')
+                        men_enc = self.objeto.ejecutar_funcion_n(i, [usuario, psw])
+                        self.mensaje = [men_enc, 1]
                     else:
                         #pasar a la siguiente pantalla
-                        #self.bool_sgt_pnt = True
-                        pass
+                        self._bool_sgt_pnt = True
 
 
-    def loopear(self, repetir, fondo):        
+    #Ya no se usará; sin embargo puede servir de referencia
+    #para algún cambio en loopear_2()
+    def loopear(self, repetir, fondo=''):        
         
         sc_login = self.objeto
         sc_login.cargar_imagenes()
@@ -145,7 +152,7 @@ class ScreenMaster(pygame.sprite.Sprite):
                     self.accion_obj_presionado(self.obj_pressed)
                 self.obj_pressed = None
 
-            if self.bool_sgt_pnt:
+            if self._bool_sgt_pnt:
                 self.cambiar_fondo(fondo)
                 #Posiblemente main = False
             
@@ -156,17 +163,13 @@ class ScreenMaster(pygame.sprite.Sprite):
             pygame.display.flip()
             self.clock.tick(self.fps)
 
-
-    #Por algún motivo consume muchos más recursos
-    def loopear_2(self, repetir, fondo=''):
+    
+    def loopear_2(self):
         
-        #sc_prejuego = self.objeto
-        #sc_prejuego.cargar_imagenes()
-        #self.botones = self.objeto.imgs
-        
-        
-        if repetir:
-            pres = False # Botón izq del mouse presionado            
+        if not self._bool_sgt_pnt:
+            # Botón izq del mouse presionado 
+            # corregir, por ahora responde a cualquier boton, scroll
+            pres = False 
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -189,8 +192,8 @@ class ScreenMaster(pygame.sprite.Sprite):
                 #print(str(pos))
                 self.lugar_funcional(pos, self.objeto.pcs, self.objeto.sizes)
 
-            if self.bool_sgt_pnt:
-                self.cambiar_fondo(fondo)
+            if self._bool_sgt_pnt:
+                self.cambiar_fondo(self.fondo)
                 #Posiblemente main = False
             
             
