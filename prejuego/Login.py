@@ -15,8 +15,9 @@ class Login():
         self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
         self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
         self.cargar_imagenes()
+        self.clave_publica_Server = None
     
-
+    
     def cargar_imagenes(self):
         #Cargar a memoria las imágenes de los botones
         btn_0 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
@@ -37,12 +38,12 @@ class Login():
 
     def ejecutar_funcion_n(self, n, otros=[]):        
         if n == 0: # Intento de inicio de sesión
-            #Obtener los textos de los input box
+            #Se obtuvo los textos de los input box
             usr = otros[0]
-            psw = otros[1]            
+            psw = self.sha256_psw(otros[1])
             
             #Encriptar usuario y contraseña
-            return self.encriptar_usr_psw(otros[0], usr, psw)            
+            return self.encriptar_usr_psw(usr, psw)
         elif n == 1: # Olvide contraseña
             pass
         elif n == 2: # Nuevo usuario
@@ -51,20 +52,20 @@ class Login():
             pass
 
         
+    def set_clave_asimetrica_server(self, clave):
+        self.clave_publica_Server = clave
 
-
-
-    def encriptar_usr_psw(self, clave, usuario='', psw=''):
+    def encriptar_usr_psw(self, usuario='', psw=''):
         #Calcular el hash de la contraseña
         psw = self.sha256_psw(psw)
         #Encriptado asimétrico con la clave pública suministrada por el server
         usr_enc = None
         psw_enc = None
-        
+        print('encriptando')
         return (usr_enc, psw_enc)
         
 
     def sha256_psw(self, psw=""):
-        #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing
-        psw_hash = hashlib.sha256(psw.encode('utf-8'))        
+        #https://stackoverflow.com/questions/7585307/how-to-correct-typeerror-unicode-objects-must-be-encoded-before-hashing        
+        psw_hash = hashlib.sha256(psw.encode('utf-8'))
         return psw_hash.hexdigest()

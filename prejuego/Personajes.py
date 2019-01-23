@@ -8,27 +8,45 @@ para que tengan el tamaño y posición adecuados
 '''
 class Personajes():
     def __init__(self):
-        self.imgs=[] #imágenes de los botones
-        self.btns = [] #bones[(imagen, posicion)]
-        self.pcs = [(0,0),(350,180),(700,360),(1050,540)]    #posición de la esquina superior izquierda
-        self.sizes = [(200,100),(200,100),(200,100),(200,100)]  #largo x alto
+        self.imgs=[] #imágenes de los botones 
+        self.pcs = []    #estarán uniformemente distribuidos
+        self.sizes = [(200,150)]  #Tamaño único
+        
+        self.distribuir_imagenes()
         self.cargar_imagenes()
+        self.clave_simetrica = None #Tras haberse autenticado el usuario, se empezará a usar criptografía simétrica
 
     
+    def distribuir_imagenes(self):
+        for i in range(5):
+            #MOdificar valores cuando se tenga las imágenes finales
+            pos_X = 80 + i*200
+            pos_y = 100
+            tupla_pos = (pos_X, pos_y)
+            self.pcs.append(tupla_pos)
+
+
 
     def cargar_imagenes(self):
         #Cargar a memoria las imágenes de los botones
-        btn_0 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
-        btn_1 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
-        btn_2 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
-        btn_3 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        per_0 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        per_1 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        per_2 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        per_3 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
+        per_4 = pygame.image.load(os.getcwd() + "/images/botones/registrar.png")
 
         '''
         #Darles el tamaño apropiado
         Modificar los tamaños
         '''        
-        btn_registrar = pygame.transform.scale(btn_0, self.sizes[0])
-        btn_olvide = pygame.transform.scale(btn_1, self.sizes[1])
-        btn_creditos = pygame.transform.scale(btn_2, self.sizes[2])
-        btn_salir = pygame.transform.scale(btn_3, self.sizes[3])
-        self.imgs = [btn_registrar, btn_olvide, btn_creditos, btn_salir]
+        per_0 = pygame.transform.scale(per_0, self.sizes[0])
+        per_1 = pygame.transform.scale(per_1, self.sizes[0])
+        per_2 = pygame.transform.scale(per_2, self.sizes[0])
+        per_3 = pygame.transform.scale(per_3, self.sizes[0])
+        per_4 = pygame.transform.scale(per_3, self.sizes[0])
+        self.imgs = [per_0, per_1, per_2, per_3, per_4]
+
+    def ejecutar_funcion_n(self, n, otros=[]):
+        pass
+
+    

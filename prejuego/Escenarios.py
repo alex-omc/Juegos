@@ -11,13 +11,16 @@ class Escenarios():
         self.btns = [] #bones[(imagen, posicion)]
         self.pcs = []    #estarán uniformemente distribuidos
         self.sizes = [(240,150)]  #Tamaño único
+        
+        self.distribuir_imagenes()
         self.cargar_imagenes()
+    
     
     '''
     Crear las fórmulas para distribuir uniformemente los 10
     fondos a elegir
     '''
-    def distribuir_escenarios(self):
+    def distribuir_imagenes(self):
         for i in range(10):
             pos_X = 0
             pos_y = 0
