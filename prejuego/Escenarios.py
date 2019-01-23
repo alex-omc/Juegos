@@ -5,7 +5,7 @@ import os
 Cuando ya estén las imágenes de los fondos, modificar los números 
 para que tengan el tamaño y posición adecuados
 '''
-class Login():
+class Escenarios():
     def __init__(self):
         self.imgs=[] #imágenes de los fondos
         self.btns = [] #bones[(imagen, posicion)]

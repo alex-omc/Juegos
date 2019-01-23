@@ -36,10 +36,10 @@ class Login():
 
 
     def ejecutar_funcion_n(self, n, otros=[]):        
-        if n == 0: # Iniciar sesión
+        if n == 0: # Intento de inicio de sesión
             #Obtener los textos de los input box
-            usr = ""
-            psw = ""
+            usr = otros[0]
+            psw = otros[1]            
             
             #Encriptar usuario y contraseña
             return self.encriptar_usr_psw(otros[0], usr, psw)            
@@ -49,6 +49,8 @@ class Login():
             pass
         elif n == 3: # Salir
             pass
+
+        
 
 
 
