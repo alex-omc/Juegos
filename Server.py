@@ -1,4 +1,5 @@
-import cryptography as cr
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import rsa
 #import numpy
 import random
 
@@ -18,8 +19,8 @@ class Servidor():
         self.players = []
         self.ip_players = []
         self.symmetric_keys=[]
-        self.public_key
-        self.private_key
+        self.llave_publica = None
+        self.llave_privada = None
         
 
 
@@ -28,10 +29,10 @@ class Servidor():
         Ver cómo funciona IKEv2, o sea el órden
         '''
         #El cliente usará la clave pública para enviar la tupla (user, password)
-        #Código obtenido de fuente n°1
-        self.private_key = cr.hazmat.primitives.asymmetric.rsa.generate_private_key( public_exponent=65537,
-                        key_size=2048, backend=cr.hazmat.backends.default_backend())
-        self.public_key = self.private_key.public_key()
+        #Código obtenido de fuente n°1        
+        self.llave_privada = rsa.generate_private_key( public_exponent=65537, 
+                             key_size=2048, backend=default_backend())
+        self.llave_publica = self.llave_privada.public_key()
           
 
     def generar_llaves_simetricas(self):
@@ -59,8 +60,7 @@ class Servidor():
         else:
             return esc[1]
 
-   
-    
+       
     def enviar_mensaje_encriptado(self, destino, mensaje = ''):
         pass
 
@@ -69,3 +69,39 @@ class Servidor():
         pass
     
 
+def main():
+    server = Servidor()
+    
+    server.generar_par_de_claves()
+    server.generar_llaves_simetricas()
+        
+    
+    #Otras acciones con la base de datos
+    #Nuevo usuario/olvide psw
+    
+    
+    #Corroborar autenticidad del usuario
+
+
+    #Enviar clave simétrica
+        
+    
+    #Enviar si será héroe o corrputo
+
+
+    #Esperar ambas respuestas de personaje, escenario
+
+
+    #Elegir un escenario aleatoriamente 
+
+
+    #Informar a los jugadores del escenario
+
+
+    #empezar la partida
+    
+
+
+
+if __name__ == '__main__':
+    main()
