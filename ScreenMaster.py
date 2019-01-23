@@ -13,13 +13,14 @@ solo encontré para dibujar formas geométricas
 
 class ScreenMaster(pygame.sprite.Sprite): 
             
-    def __init__(self):
+    def __init__(self, objeto):
+        self.objeto = objeto
         self.screen_dim = [1280, 800]
         self.iniciar_pantalla()
         self.fondo = ""
         self.bool_sgt_pnt = False #Cambiar a la siguiente pantalla
-        self.botones = [] #Almacenará el objeto boton como imagen
-        self.textos = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
+        #self.botones = [] #Almacenará el objeto boton como imagen
+        #self.textos = [] #Almacenará el objeto boton, y el area que ocupa (tupla esq-largo-ancho)
         self.obj_pressed = None #Indica que objeto está siendo presionado en un momento determinado
         self.mensaje = ["mensaje", 0] #es el texto que se va a enviar al motor (0), y de ser el caso reenviado al servidor(1)
 
@@ -27,7 +28,7 @@ class ScreenMaster(pygame.sprite.Sprite):
         self.backdrop = 0
         self.backdropbox = 0
         self.clock = 0
-        self.fps   = 60  # frame rate        
+        self.fps   = 40  # frame rate        
         self.clock = pygame.time.Clock()
 
 
@@ -93,17 +94,20 @@ class ScreenMaster(pygame.sprite.Sprite):
             if (cx and cy):
                 print("Se ha presionado el lugar funcional " + str(i))
                 #Se modifica el valor de la variable self.obj_pressed
-                #self.obj_pressed = 
+                
+                if i == 0:
+                    if (type(self.objeto) == Login.Login()):
+                        self.objeto.ejecutar_funcion_n(i, ['usuario', 'password']) 
+                    else:
+                        #pasar a la siguiente pantalla
+                        pass
 
-
-    def accion_obj_presionado(self, obj):
-        pass
-
-
+    # Deprecado, no se usará; sin embargo no se borra
+    # por si más adelante resulta ser necesario
     def loopear(self, repetir=True):
         main = repetir
         
-        sc_login = Login.Login()
+        sc_login = self.objeto
         sc_login.cargar_imagenes()
         self.botones = sc_login.imgs
         
@@ -144,6 +148,50 @@ class ScreenMaster(pygame.sprite.Sprite):
             #Mantener viva la ventana 
             self.world.blit(self.backdrop, self.backdropbox)    
             self.dibujar_botones(sc_login.imgs, sc_login.pcs)
+            pygame.display.flip()
+            self.clock.tick(self.fps)
+
+
+    def loopear_2(self, repetir):
+        
+        sc_prejuego = self.objeto
+        sc_prejuego.cargar_imagenes()
+        self.botones = sc_prejuego.imgs
+        
+        
+        if repetir:
+            pres = False # Botón izq del mouse presionado
+            str_sgt_pnt = "" #Nombre del siguiente fondo a cargar
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit(); sys.exit()
+                    main = False            
+                
+                #Verificar si el botón del mouse está presionado
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    pres = True
+                
+                #######################
+                #######################
+                ###presionar  enter####
+                #######################
+                #######################    
+
+            if pres:
+                #retorna una tupla (x,y) de las coordenadas del mouse
+                pos = pygame.mouse.get_pos()
+                #print(str(pos))
+                self.lugar_funcional(pos, sc_prejuego.pcs, sc_prejuego.sizes)
+
+            if self.bool_sgt_pnt:
+                self.cambiar_fondo(str_sgt_pnt)
+                #Posiblemente main = False
+            
+            
+            #Mantener viva la ventana 
+            self.world.blit(self.backdrop, self.backdropbox)    
+            self.dibujar_botones(sc_prejuego.imgs, sc_prejuego.pcs)
             pygame.display.flip()
             self.clock.tick(self.fps)
 

@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 import random
 
 
-class Servidor():
+class Server():
     '''
     Criptografía Asimétrica
         fuente n°1 = https://nitratine.net/blog/post/asymmetric-encryption-and-decryption-in-python/
@@ -70,7 +70,7 @@ class Servidor():
     
 
 def main():
-    server = Servidor()
+    server = Server()
     
     server.generar_par_de_claves()
     server.generar_llaves_simetricas()
