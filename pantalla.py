@@ -99,9 +99,11 @@ class Pantalla2(Pantalla):
         #Imagenes a usar
         personaje = "hero"
         fondo = "desert"        
-        p1 = Personaje(imagen = personaje, pos=[110,110])       
-        
+                
+        p1 = Personaje(imagen = personaje, pos=[110,110])
         f1 = Fondo(fondo)
+        #Este desplazamiento del fondo es solo para probar que ya no se está renderizando 
+        #la pantalla anterior
         f1.x = 110
         f1.y = 110
 
