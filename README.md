@@ -10,8 +10,8 @@
 <p> </p>
 
 <h2>Comandos para la ejecución</h2>
-<p>python Engine.py hero Background</p>
-<p>python AbajoLosCorruptos.py</p>
+<p>python .\game.py</p>
+
 
 <p> </p>
 <p> </p>
