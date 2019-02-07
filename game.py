@@ -12,7 +12,7 @@ class ScreenManager:
 
     def __init__(self):
         pygame.init()
-        img_background = "Background"
+        #img_background = "Background"
         #self._pantalla_actual = EjemploPantalla(canvas)
         self.clock = pygame.time.Clock()
         #backdrop = pygame.image.load("images/fondos/" + img_background + ".png").convert()
@@ -60,5 +60,4 @@ def main():
     
 
 if __name__ == "__main__":
-
     main()
