@@ -49,11 +49,12 @@ class ScreenManager:
 
 def main():
 
-    pantalla1 = Pantalla1()
-    pantalla2 = Pantalla2()
+    pantalla1 = Pantalla1()    
     manager = ScreenManager.get_instance()
     manager.cambiar_pantalla(pantalla1)
     manager.run()
+    
+    pantalla2 = Pantalla2()
     manager.cambiar_pantalla(pantalla2)
     manager.run()
     

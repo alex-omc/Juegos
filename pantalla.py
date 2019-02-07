@@ -98,9 +98,12 @@ class Pantalla2(Pantalla):
         Pantalla.__init__(self)
         #Imagenes a usar
         personaje = "hero"
-        fondo = "cosmos"        
-        p1 = Personaje(personaje)       
+        fondo = "desert"        
+        p1 = Personaje(imagen = personaje, pos=[110,110])       
+        
         f1 = Fondo(fondo)
+        f1.x = 110
+        f1.y = 110
 
         self.agregar_sprite(fondo,f1)
         self.agregar_sprite(personaje,p1)
