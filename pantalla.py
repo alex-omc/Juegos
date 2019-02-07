@@ -36,6 +36,10 @@ class Pantalla:
         "Retroceder": False #Pantalla anterior
         }
 
+    def set_nombre_ventana(self, titulo):
+        pygame.display.set_caption(titulo)
+    
+    
     def obtener_ultima_pantalla(self):
         pass
 
@@ -88,6 +92,7 @@ class Pantalla1(Pantalla):
         p1 = Personaje(personaje)        
         f1 = Fondo(fondo)
 
+        self.set_nombre_ventana("Pantalla 1")
         self.agregar_sprite(fondo,f1)
         self.agregar_sprite(personaje,p1)
         self.handle_events()
@@ -99,14 +104,10 @@ class Pantalla2(Pantalla):
         #Imagenes a usar
         personaje = "hero"
         fondo = "desert"        
-                
-        p1 = Personaje(imagen = personaje, pos=[110,110])
-        f1 = Fondo(fondo)
-        #Este desplazamiento del fondo es solo para probar que ya no se está renderizando 
-        #la pantalla anterior
-        f1.x = 110
-        f1.y = 110
+        p1 = Personaje(imagen = personaje, pos=[110,110])        
+        f1 = Fondo(fondo = fondo, pos = [100, 100])        
 
+        self.set_nombre_ventana("Pantalla 2")
         self.agregar_sprite(fondo,f1)
         self.agregar_sprite(personaje,p1)
         self.handle_events()
