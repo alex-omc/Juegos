@@ -12,7 +12,7 @@ class ScreenManager:
 
     def __init__(self):
         pygame.init()
-        #; moví img_background = "Background"
+        #img_background = "Background"
         #self._pantalla_actual = EjemploPantalla(canvas)
         self.clock = pygame.time.Clock()
         #backdrop = pygame.image.load("images/fondos/" + img_background + ".png").convert()
@@ -27,7 +27,7 @@ class ScreenManager:
         self.condicion = 0
         self.aux = True
         self.pantalla.append(nueva_pantalla)
-        self.indice_actual = self.indice_actual + 1
+        self.indice_actual += 1
         self._pantalla_actual = self.pantalla[self.indice_actual]
 
     def condicion_pantalla(self):
@@ -45,12 +45,12 @@ class ScreenManager:
             self._pantalla_actual.render()
             self.clock.tick(60)
             self.condicion_pantalla()
-            self.condicion = self.condicion + 1
+            self.condicion += 1
 
 def main():
     manager = ScreenManager.get_instance()
-
-    pantalla1 = Pantalla1()       
+    
+    pantalla1 = Pantalla1()     
     manager.cambiar_pantalla(pantalla1)
     manager.run()
     
