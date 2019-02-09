@@ -17,6 +17,7 @@ class Fondo(pygame.sprite.Sprite):
     def __init__(self, fondo, pos=[0,0], size=(800,600)):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(os.getcwd() + "/images/fondos/" + fondo + ".png")
+        self.image = pygame.transform.scale(self.image, size)
         self.x = pos[0]
         self.y = pos[1]
         self.ancho = size[0]
