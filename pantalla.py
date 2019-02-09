@@ -14,20 +14,20 @@ class Personaje(pygame.sprite.Sprite):
         self.alto = size[1]
 
 class Fondo(pygame.sprite.Sprite):
-    def __init__(self, fondo, pos=[0,0], size=(800,600)):
+    def __init__(self, fondo, pos=[0,0]):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.getcwd() + "/images/fondos/" + fondo + ".png")
-        self.image = pygame.transform.scale(self.image, size)
+        self.image = pygame.image.load(os.getcwd() + "/images/fondos/" + fondo + ".png")    
+        self.image = pygame.transform.scale(self.image, Pantalla.resolucion())
         self.x = pos[0]
         self.y = pos[1]
-        self.ancho = size[0]
-        self.alto = size[1]
+        self.ancho = Pantalla.resolucion()[0]
+        self.alto = Pantalla.resolucion()[1]
         
 
 class Pantalla:
     def __init__(self):
         self.sprites = {}
-        self.canvas = pygame.display.set_mode((800, 600))
+        self.canvas = pygame.display.set_mode(self.resolucion())
         self.eventos =	{
         "Retroceder": False, #Pantalla anterior
         "Arriba": False,
@@ -39,6 +39,10 @@ class Pantalla:
         "POSY": 0
         }
 
+    @classmethod
+    def resolucion(cls):
+        return (800, 600)
+    
     def set_nombre_ventana(self, titulo):
         pygame.display.set_caption(titulo)
     
