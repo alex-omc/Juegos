@@ -1,4 +1,5 @@
 import pygame
+import Player as pl
 import sys
 import os
 
@@ -12,6 +13,16 @@ class Personaje(pygame.sprite.Sprite):
         self.y = pos[1]
         self.ancho = size[0]
         self.alto = size[1]
+
+'''class Animacion(pygame.sprite.Sprite):  
+    def set_animaciones(self):        
+        for i in range(1, 11):
+            img = pygame.image.load(os.path.join('images/personajes/' + str(self.player_id), str(self.player_id) + str(i) + '.png')).convert()
+            self.images.append(img)
+            self.image = self.images[0]
+            self.rect = self.image.get_rect()
+            img.convert_alpha()  # optimise alpha
+            img.set_colorkey((255,255,255))  # set alpha'''
 
 class Fondo(pygame.sprite.Sprite):
     def __init__(self, fondo, pos=[0,0]):
@@ -51,7 +62,12 @@ class Pantalla:
 
     def agregar_sprite(self, nombre, sprite):
         self.sprites[nombre] = sprite
-        
+
+    def reproducir_sonido(self, musica): #musica es el archivo de sonido, este solo sonara una vez ej: disparos
+        #pygame.mixer.music.load(os.getcwd() + "/Audios/Animaciones/" + musica + ".mp3")
+        s = pygame.mixer.Sound(os.getcwd() + "/Audios/Animaciones/" + musica + ".wav")
+        pygame.mixer.Sound.play(s)
+
     def handle_events(self):
         
         for event in pygame.event.get():
@@ -68,9 +84,11 @@ class Pantalla:
                     print(self.eventos["Izquierda"])
                 if event.key == pygame.K_RIGHT:
                     self.eventos["Derecha"]=True
+                    self.reproducir_sonido("Golpe")
                     print(self.eventos["Derecha"])
                 if event.key == pygame.K_UP:
                     self.eventos["Arriba"]=True
+                    self.reproducir_sonido("HeadShot")
                     print(self.eventos["Arriba"])
                 if event.key == pygame.K_DOWN:
                     self.eventos["Abajo"]=True
@@ -96,34 +114,39 @@ class Pantalla:
         pygame.display.flip()
     
 class Pantalla1(Pantalla):
-    def __init__(self):
+    def __init__(self):        
         Pantalla.__init__(self)
         #Imagenes a usar
         personaje = "hero"
         fondo = "Fondo1"               
         p1 = Personaje(personaje)        
         f1 = Fondo(fondo)
-
+        
         self.set_nombre_ventana("Pantalla 1")
         self.agregar_sprite(fondo,f1)
         self.agregar_sprite(personaje,p1)
         self.handle_events()
         self.update()
+        
 
 class Pantalla2(Pantalla):
     def __init__(self):
         Pantalla.__init__(self)
         #Imagenes a usar
-        personaje = "hero"
-        fondo = "Fondo2"        
-        p1 = Personaje(imagen = personaje, pos=[110,110])        
-        f1 = Fondo(fondo = fondo, pos = [100, 100])        
+        personaje = "alan"
+        fondo = "Fondo2"
+        jugador = "hero"
+        p1 = Personaje(imagen = personaje, size=(63, 125), pos=[450,450])        
+        f1 = Fondo(fondo = fondo, pos = [50, 50])
+        j1 = pl.Player(jugador)
 
         self.set_nombre_ventana("Pantalla 2")
-        self.agregar_sprite(fondo,f1)
-        self.agregar_sprite(personaje,p1)
+        self.agregar_sprite(fondo, f1)
+        self.agregar_sprite(personaje, p1)
+        self.agregar_sprite(jugador, j1)
         self.handle_events()
         self.update()
+
 
 
 

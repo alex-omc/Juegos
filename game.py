@@ -3,12 +3,17 @@ from pantalla import *
 
 class ScreenManager:
     instancia = None
-
+    
     @classmethod
     def get_instance(cls): # Metodo de clase
         if cls.instancia == None:
             cls.instancia = ScreenManager()
         return cls.instancia
+    
+    def reproducir_sonido(self, musica): #musica es el archivo del background 2
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load(os.getcwd() + "/Audios/Sonido_Fondo/" + musica + ".mp3")
+        pygame.mixer.music.play(-1)   
 
     def __init__(self):
         pygame.init()
@@ -33,12 +38,18 @@ class ScreenManager:
     def condicion_pantalla(self):
 
         #CONDICION DE PRUEBA
-        if self.condicion < 100:
+        if self.condicion < 150:
             self.aux = True
         else:
             self.aux = False
 
-    def run(self):
+    def run(self, bkg):
+
+        #insertar archivo de primer background
+        background1 = os.getcwd() + "/Audios/Sonido_Fondo/" + bkg + ".mp3" 
+        pygame.mixer.music.load(background1)
+        pygame.mixer.music.play(-1)
+
         while self.aux == True:
             self._pantalla_actual.handle_events()
             self._pantalla_actual.update()
@@ -50,13 +61,15 @@ class ScreenManager:
 def main():
     manager = ScreenManager.get_instance()
     
-    pantalla1 = Pantalla1()     
+    pantalla1 = Pantalla1()
+    manager.reproducir_sonido("Horror1")
     manager.cambiar_pantalla(pantalla1)
-    manager.run()
+    manager.run("Horror1")
     
     pantalla2 = Pantalla2()
+    manager.reproducir_sonido("MortalKombat")
     manager.cambiar_pantalla(pantalla2)
-    manager.run()
+    manager.run("MortalKombat")
     
 
 if __name__ == "__main__":
